@@ -1,35 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import Word from "./components/Word/Word";
+import Keyboard from "./components/Keyboard/Keyboard";
+import Hangman from "./components/Hangman/Hangman";
+
+const WORDS = ["javascript", "react", "vite", "frontend"];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [word] = useState(WORDS[Math.floor(Math.random() * WORDS.length)]);
+  const [guessedLetters, setGuessedLetters] = useState([]);
+  const [mistakes, setMistakes] = useState(0);
+
+  const checkLetter = (letter) => {
+    if (guessedLetters.includes(letter) || mistakes >= 6) return;
+
+    if (!word.includes(letter)) {
+      setMistakes(mistakes + 1);
+    }
+    setGuessedLetters([...guessedLetters, letter]);
+  };
+
+  const isGameOver = mistakes >= 6;
+  const isGameWon = word
+    .split("")
+    .every((letter) => guessedLetters.includes(letter));
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <Hangman mistakes={mistakes} />
+      <Word word={word} guessedLetters={guessedLetters} />
+      <Keyboard checkLetter={checkLetter} disabled={isGameOver || isGameWon} />
+      {isGameOver && <p>Przegrałeś! Słowo to: {word}</p>}
+      {isGameWon && <p>Gratulacje, wygrałeś!</p>}
+    </div>
+  );
 }
 
-export default App
+export default App;
