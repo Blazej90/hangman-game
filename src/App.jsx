@@ -1,36 +1,68 @@
-import React, { useState } from "react";
-import Word from "./components/Word/Word";
-import Keyboard from "./components/Keyboard/Keyboard";
-import Hangman from "./components/Hangman/Hangman";
-
-const WORDS = ["javascript", "react", "vite", "frontend"];
+import React, { useState, useEffect } from "react";
+import Hangman from "./components/Hangman/Hangman.jsx";
+import Keyboard from "./components/Keyboard/Keyboard.jsx";
+import Word from "./components/Word/Word.jsx";
+import ResetButton from "./components/ResetButton/ResetButton.jsx";
+import { getRandomWord } from "./utils/words.js";
 
 function App() {
-  const [word] = useState(WORDS[Math.floor(Math.random() * WORDS.length)]);
+  // Stany gry
+  const [word, setWord] = useState(getRandomWord());
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [mistakes, setMistakes] = useState(0);
+  const [gameStatus, setGameStatus] = useState(null);
+  const maxMistakes = 10;
 
-  const checkLetter = (letter) => {
-    if (guessedLetters.includes(letter) || mistakes >= 6) return;
+  useEffect(() => {
+    checkGameStatus();
+  }, [guessedLetters, mistakes]);
 
-    if (!word.includes(letter)) {
-      setMistakes(mistakes + 1);
+  // Funkcja resetująca stan gry
+  function resetGame() {
+    setWord(getRandomWord());
+    setGuessedLetters([]);
+    setMistakes(0);
+    setGameStatus(null);
+  }
+
+  // Funkcja sprawdzająca, czy gra jest wygrana lub przegrana
+  function checkGameStatus() {
+    if (word.split("").every((letter) => guessedLetters.includes(letter))) {
+      setGameStatus("win");
+    } else if (mistakes >= maxMistakes) {
+      setGameStatus("lose");
     }
-    setGuessedLetters([...guessedLetters, letter]);
-  };
+  }
 
-  const isGameOver = mistakes >= 6;
-  const isGameWon = word
-    .split("")
-    .every((letter) => guessedLetters.includes(letter));
+  // Obsługa kliknięcia przycisku litery
+  function checkLetter(letter) {
+    if (gameStatus) return; // Jeśli gra jest zakończona, blokujemy przyciski
+
+    if (word.includes(letter)) {
+      setGuessedLetters((prev) => [...prev, letter]);
+    } else {
+      setMistakes((prev) => prev + 1);
+    }
+  }
 
   return (
     <div className="App">
       <Hangman mistakes={mistakes} />
       <Word word={word} guessedLetters={guessedLetters} />
-      <Keyboard checkLetter={checkLetter} disabled={isGameOver || isGameWon} />
-      {isGameOver && <p>Przegrałeś! Słowo to: {word}</p>}
-      {isGameWon && <p>Gratulacje, wygrałeś!</p>}
+
+      {/* Komunikaty wygranej lub przegranej */}
+      {gameStatus === "win" && <p>Brawo! To jest poprawne hasło</p>}
+      {gameStatus === "lose" && (
+        <p>Niestety przegrywasz... Prawidłowe hasło to: {word}</p>
+      )}
+
+      <Keyboard
+        checkLetter={checkLetter}
+        guessedLetters={guessedLetters}
+        word={word}
+        disabled={gameStatus !== null}
+      />
+      <ResetButton onReset={resetGame} />
     </div>
   );
 }
