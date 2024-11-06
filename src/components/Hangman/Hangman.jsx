@@ -7,7 +7,7 @@ function Hangman({ mistakes }) {
   return (
     <div className="hangman">
       <img src={imagePath} alt={`Hangman stage ${mistakes}`} />
-      <p>Błędne próby: {mistakes}/10</p>
+      <p className="trials">Błędne próby: {mistakes}/10</p>
     </div>
   );
 }

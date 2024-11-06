@@ -5,6 +5,8 @@ import Word from "./components/Word/Word.jsx";
 import ResetButton from "./components/ResetButton/ResetButton.jsx";
 import { getRandomWord } from "./utils/words.js";
 
+import "./App.css";
+
 function App() {
   // Stany gry
   const [word, setWord] = useState(getRandomWord());
@@ -36,7 +38,7 @@ function App() {
 
   // Obsługa kliknięcia przycisku litery
   function checkLetter(letter) {
-    if (gameStatus) return; // Jeśli gra jest zakończona, blokujemy przyciski
+    if (gameStatus) return;
 
     if (word.includes(letter)) {
       setGuessedLetters((prev) => [...prev, letter]);
@@ -50,10 +52,13 @@ function App() {
       <Hangman mistakes={mistakes} />
       <Word word={word} guessedLetters={guessedLetters} />
 
-      {/* Komunikaty wygranej lub przegranej */}
-      {gameStatus === "win" && <p>Brawo! To jest poprawne hasło</p>}
+      {gameStatus === "win" && (
+        <p className="win">Brawo! To jest poprawne hasło</p>
+      )}
       {gameStatus === "lose" && (
-        <p>Niestety przegrywasz... Prawidłowe hasło to: {word}</p>
+        <p className="lose">
+          Niestety przegrywasz... Prawidłowe hasło to: {word}
+        </p>
       )}
 
       <Keyboard

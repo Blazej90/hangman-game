@@ -1,24 +1,43 @@
 .hangman {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 20px 0;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
 }
 
 .hangman img {
   width: 100%;
-  max-width: 300px;
-  height: auto;
+  max-width: 400px;
+  display: block;
+  margin: 0 auto;
 }
 
-.hangman p {
+.trials {
   font-size: 1.2rem;
-  color: #ff4444;
+  color: #555;
+  margin-top: 15px;
+  text-align: center;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .hangman img {
-    max-width: 200px;
+    max-width: 350px;
   }
 
-  .hangman p {
+  .trials {
     font-size: 1rem;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .hangman img {
+    max-width: 600px;
+  }
+
+  .trials {
+    font-size: 1.1rem;
   }
 }
