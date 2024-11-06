@@ -1,6 +1,7 @@
 import React from "react";
+import "./Keybord.css";
 
-const ALPHABET = "abcdefghijklmnopqrstuvwxyz".split("");
+const ALPHABET = "aąbcćdeęfghijklłmnoópqrstuvwxyzźż".split("");
 
 function Keyboard({ checkLetter, guessedLetters, word, disabled }) {
   return (
@@ -14,7 +15,7 @@ function Keyboard({ checkLetter, guessedLetters, word, disabled }) {
           <button
             key={letter}
             onClick={() => checkLetter(letter)}
-            disabled={isGuessed || disabled} // Blokujemy przycisk, jeśli litera była zgadywana
+            disabled={isGuessed || disabled}
             style={{ backgroundColor: buttonColor }}
           >
             {letter}

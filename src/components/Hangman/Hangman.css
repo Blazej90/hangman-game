@@ -1,0 +1,24 @@
+.hangman {
+  margin: 20px 0;
+}
+
+.hangman img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+}
+
+.hangman p {
+  font-size: 1.2rem;
+  color: #ff4444;
+}
+
+@media (max-width: 768px) {
+  .hangman img {
+    max-width: 200px;
+  }
+
+  .hangman p {
+    font-size: 1rem;
+  }
+}
