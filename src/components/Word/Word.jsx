@@ -6,7 +6,11 @@ function Word({ word, guessedLetters }) {
     <div className="word">
       {word.split("").map((letter, index) => (
         <span key={index} className="letter">
-          {guessedLetters.includes(letter) ? letter : "_"}
+          {letter === " "
+            ? " "
+            : guessedLetters.includes(letter.toLowerCase())
+            ? letter
+            : "_"}
         </span>
       ))}
     </div>

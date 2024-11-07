@@ -1,7 +1,7 @@
 import React from "react";
 import "./Keybord.css";
 
-const ALPHABET = "aąbcćdeęfghijklłmnoópqrstuvwxyzźż".split("");
+const ALPHABET = "aąbcćdeęfghijklłmnoópqrsśtuvwxyzźż".split("");
 
 function Keyboard({ checkLetter, guessedLetters, word, disabled }) {
   return (
