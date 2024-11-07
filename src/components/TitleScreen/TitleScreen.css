@@ -1,0 +1,46 @@
+.title-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  background: linear-gradient(135deg, #6a1b9a, #d32f2f);
+  color: white;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.title-screen h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.difficulty-buttons button {
+  margin: 10px;
+  padding: 15px 25px;
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: #333;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.difficulty-buttons button:hover {
+  background-color: #555;
+  transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .difficulty-buttons button {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+}

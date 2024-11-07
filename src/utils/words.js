@@ -1,6 +1,9 @@
-const words = ["apple", "banana", "cherry", "orange", "grape", "mango"];
+const easyWords = ["cat", "dog", "fish"];
+const mediumWords = ["house", "garden", "school"];
+const hardWords = ["encyclopedia", "psychology", "parliament"];
 
-export function getRandomWord() {
-  const randomIndex = Math.floor(Math.random() * words.length);
-  return words[randomIndex];
+export function getRandomWord(level) {
+  const wordList =
+    level === "easy" ? easyWords : level === "medium" ? mediumWords : hardWords;
+  return wordList[Math.floor(Math.random() * wordList.length)];
 }

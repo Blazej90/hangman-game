@@ -3,31 +3,51 @@ import Hangman from "./components/Hangman/Hangman.jsx";
 import Keyboard from "./components/Keyboard/Keyboard.jsx";
 import Word from "./components/Word/Word.jsx";
 import ResetButton from "./components/ResetButton/ResetButton.jsx";
+import BackToMenuButton from "./components/BackToMenuButton/BackToMenuButton.jsx";
+import TitleScreen from "./components/TitleScreen/TitleScreen.jsx";
 import { getRandomWord } from "./utils/words.js";
 
 import "./App.css";
 
 function App() {
-  // Stany gry
-  const [word, setWord] = useState(getRandomWord());
+  const [gameStarted, setGameStarted] = useState(false);
+  const [difficulty, setDifficulty] = useState(null);
+  const [word, setWord] = useState("");
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [mistakes, setMistakes] = useState(0);
   const [gameStatus, setGameStatus] = useState(null);
   const maxMistakes = 10;
 
   useEffect(() => {
-    checkGameStatus();
-  }, [guessedLetters, mistakes]);
+    if (gameStarted) {
+      checkGameStatus();
+    }
+  }, [guessedLetters, mistakes, gameStarted]);
 
-  // Funkcja resetująca stan gry
+  function startGame(selectedDifficulty) {
+    setDifficulty(selectedDifficulty);
+    setWord(getRandomWord(selectedDifficulty));
+    setGuessedLetters([]);
+    setMistakes(0);
+    setGameStatus(null);
+    setGameStarted(true);
+  }
+
   function resetGame() {
-    setWord(getRandomWord());
+    setWord(getRandomWord(difficulty));
     setGuessedLetters([]);
     setMistakes(0);
     setGameStatus(null);
   }
 
-  // Funkcja sprawdzająca, czy gra jest wygrana lub przegrana
+  function backToMenu() {
+    setGameStarted(false);
+    setDifficulty(null);
+    setGuessedLetters([]);
+    setMistakes(0);
+    setGameStatus(null);
+  }
+
   function checkGameStatus() {
     if (word.split("").every((letter) => guessedLetters.includes(letter))) {
       setGameStatus("win");
@@ -36,7 +56,6 @@ function App() {
     }
   }
 
-  // Obsługa kliknięcia przycisku litery
   function checkLetter(letter) {
     if (gameStatus) return;
 
@@ -49,25 +68,35 @@ function App() {
 
   return (
     <div className="App">
-      <Hangman mistakes={mistakes} />
-      <Word word={word} guessedLetters={guessedLetters} />
+      {gameStarted ? (
+        <>
+          <h1>Hangman</h1>
+          <Hangman mistakes={mistakes} />
+          <Word word={word} guessedLetters={guessedLetters} />
 
-      {gameStatus === "win" && (
-        <p className="win">Brawo! To jest poprawne hasło</p>
-      )}
-      {gameStatus === "lose" && (
-        <p className="lose">
-          Niestety przegrywasz... Prawidłowe hasło to: {word}
-        </p>
-      )}
+          {gameStatus === "win" && (
+            <p className="win">Brawo! To jest poprawne hasło</p>
+          )}
+          {gameStatus === "lose" && (
+            <p className="lose">
+              Niestety przegrywasz... Prawidłowe hasło to: {word}
+            </p>
+          )}
 
-      <Keyboard
-        checkLetter={checkLetter}
-        guessedLetters={guessedLetters}
-        word={word}
-        disabled={gameStatus !== null}
-      />
-      <ResetButton onReset={resetGame} />
+          <Keyboard
+            checkLetter={checkLetter}
+            guessedLetters={guessedLetters}
+            word={word}
+            disabled={gameStatus !== null}
+          />
+          <div className="button-group">
+            <ResetButton onReset={resetGame} />
+            <BackToMenuButton onBackToMenu={backToMenu} />
+          </div>
+        </>
+      ) : (
+        <TitleScreen onSelectDifficulty={startGame} />
+      )}
     </div>
   );
 }
