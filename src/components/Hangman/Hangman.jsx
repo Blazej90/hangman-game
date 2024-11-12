@@ -2,7 +2,7 @@ import React from "react";
 import "./Hangman.css";
 
 function Hangman({ mistakes, category }) {
-  const imagePath = `/src/assets/images/hangman${Math.min(mistakes, 10)}.jpg`;
+  const imagePath = `/images/hangman${Math.min(mistakes, 10)}.jpg`;
 
   return (
     <div className="hangman">
