@@ -2,17 +2,26 @@ import React from "react";
 import "./Word.css";
 
 function Word({ word, guessedLetters }) {
+  const guessedLettersUpper = guessedLetters.map((letter) =>
+    letter.toUpperCase()
+  );
+
   return (
     <div className="word">
-      {word.split("").map((letter, index) => (
-        <span key={index} className="letter">
-          {letter === " "
+      {word.split("").map((letter, index) => {
+        const displayLetter =
+          letter === " "
             ? " "
-            : guessedLetters.includes(letter.toLowerCase())
+            : guessedLettersUpper.includes(letter.toUpperCase())
             ? letter
-            : "_"}
-        </span>
-      ))}
+            : "_";
+
+        return (
+          <span key={index} className="letter">
+            {displayLetter}
+          </span>
+        );
+      })}
     </div>
   );
 }

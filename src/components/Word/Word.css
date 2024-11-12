@@ -1,6 +1,7 @@
 .word {
   display: flex;
   justify-content: center;
+  gap: 10px;
   font-size: 2rem;
   letter-spacing: 10px;
   margin-bottom: 30px;
@@ -8,7 +9,6 @@
 
 .word span {
   display: inline-block;
-  border-bottom: 2px solid #333;
   width: 20px;
   text-align: center;
   color: #333;

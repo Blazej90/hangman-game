@@ -10,7 +10,7 @@ const mediumWords = {
 };
 
 const hardWords = {
-  "Przysłowia Polskie": ["nie ma róży bez kolców", "coś za ząb"],
+  "Przysłowia Polskie": ["nie ma róży bez kolców", "coś na ząb"],
   "Tytuły filmów": ["inception", "titanic", "matrix"],
 };
 
@@ -33,5 +33,5 @@ export function getRandomWord(level) {
   const randomWord =
     wordsInCategory[Math.floor(Math.random() * wordsInCategory.length)];
 
-  return { word: randomWord, category: randomCategory };
+  return { word: randomWord.toUpperCase(), category: randomCategory };
 }

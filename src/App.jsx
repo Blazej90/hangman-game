@@ -66,13 +66,13 @@ function App() {
   }
 
   function checkLetter(letter) {
-    const lowerCaseLetter = letter.toLowerCase();
+    const upperCaseLetter = letter.toUpperCase();
 
     if (gameStatus) return;
 
-    if (word.toLowerCase().includes(lowerCaseLetter)) {
-      if (!guessedLetters.includes(lowerCaseLetter)) {
-        setGuessedLetters((prev) => [...prev, lowerCaseLetter]);
+    if (word.toUpperCase().includes(upperCaseLetter)) {
+      if (!guessedLetters.includes(upperCaseLetter)) {
+        setGuessedLetters((prev) => [...prev, upperCaseLetter]);
       }
     } else {
       setMistakes((prev) => prev + 1);
