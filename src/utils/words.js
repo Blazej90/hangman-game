@@ -1,28 +1,14 @@
-const easyWords = {
-  Zwierzęta: ["cat", "dog", "fish"],
-  Warzywa: ["carrot", "onion", "potato"],
-  Owoce: ["apple", "banana", "cherry"],
-};
-
-const mediumWords = {
-  "Marki samochodów": ["BMW", "Toyota", "Ford"],
-  "Znani sportowcy": ["Jordan", "Kobe", "Messi"],
-};
-
-const hardWords = {
-  "Przysłowia Polskie": ["nie ma róży bez kolców", "coś na ząb"],
-  "Tytuły filmów": ["inception", "titanic", "matrix"],
-};
+import wordData from "../data/words.json";
 
 export function getRandomWord(level) {
   let wordList;
 
   if (level === "easy") {
-    wordList = easyWords;
+    wordList = wordData.easyWords;
   } else if (level === "medium") {
-    wordList = mediumWords;
+    wordList = wordData.mediumWords;
   } else {
-    wordList = hardWords;
+    wordList = wordData.hardWords;
   }
 
   const categories = Object.keys(wordList);

@@ -31,7 +31,7 @@ h1 {
 }
 
 .win {
-  color: #4caf50;
+  color: #348837;
   font-weight: bold;
   font-size: 1.5rem;
   margin-top: 20px;
@@ -40,7 +40,7 @@ h1 {
 }
 
 .lose {
-  color: #e53935;
+  color: #d22421;
   font-weight: bold;
   font-size: 1.5rem;
   margin-top: 20px;
