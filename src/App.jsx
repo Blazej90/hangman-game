@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Hangman from "./components/Hangman/Hangman.jsx";
 import Keyboard from "./components/Keyboard/Keyboard.jsx";
 import Word from "./components/Word/Word.jsx";
 import ResetButton from "./components/ResetButton/ResetButton.jsx";
 import BackToMenuButton from "./components/BackToMenuButton/BackToMenuButton.jsx";
 import TitleScreen from "./components/TitleScreen/TitleScreen.jsx";
+import LanguageSwitch from "./components/LanguageSwitch/LanguageSwitch.jsx";
 import { getRandomWord } from "./utils/words.js";
 
 import "./App.css";
 
 function App() {
+  const [language, setLanguage] = useState("PL");
   const [gameStarted, setGameStarted] = useState(false);
   const [difficulty, setDifficulty] = useState(null);
   const [word, setWord] = useState("");
@@ -18,6 +20,10 @@ function App() {
   const [mistakes, setMistakes] = useState(0);
   const [gameStatus, setGameStatus] = useState(null);
   const maxMistakes = 10;
+
+  const toggleLanguage = () => {
+    setLanguage((prev) => (prev === "PL" ? "EN" : "PL"));
+  };
 
   function startGame(selectedDifficulty) {
     setDifficulty(selectedDifficulty);
@@ -79,7 +85,7 @@ function App() {
     }
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (gameStarted) {
       checkGameStatus();
     }
@@ -87,17 +93,25 @@ function App() {
 
   return (
     <div className="App">
+      <LanguageSwitch language={language} toggleLanguage={toggleLanguage} />
+
       {gameStarted ? (
         <>
-          <h1>Hangman</h1>
-          <Hangman mistakes={mistakes} category={category} />{" "}
+          <h1>{language === "EN" ? "Hangman" : "Wisielec"}</h1>
+          <Hangman mistakes={mistakes} category={category} />
           <Word word={word} guessedLetters={guessedLetters} />
           {gameStatus === "win" && (
-            <p className="win">Brawo! To jest poprawne hasło</p>
+            <p className="win">
+              {language === "EN"
+                ? "Congratulations! You guessed the word."
+                : "Brawo! To jest poprawne hasło."}
+            </p>
           )}
           {gameStatus === "lose" && (
             <p className="lose">
-              Niestety przegrywasz... Prawidłowe hasło to: {word}
+              {language === "EN"
+                ? `Sorry, you lost... The correct word was: ${word}`
+                : `Niestety przegrywasz... Prawidłowe hasło to: ${word}`}
             </p>
           )}
           <Keyboard
@@ -107,12 +121,16 @@ function App() {
             disabled={gameStatus !== null}
           />
           <div className="button-group">
-            <ResetButton onReset={resetGame} />
-            <BackToMenuButton onBackToMenu={backToMenu} />
+            <ResetButton onReset={resetGame} language={language} />
+            <BackToMenuButton onBackToMenu={backToMenu} language={language} />
           </div>
         </>
       ) : (
-        <TitleScreen onSelectDifficulty={startGame} />
+        <TitleScreen
+          onSelectDifficulty={startGame}
+          language={language}
+          toggleLanguage={toggleLanguage}
+        />
       )}
     </div>
   );

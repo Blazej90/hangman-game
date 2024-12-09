@@ -1,14 +1,20 @@
 import React from "react";
 import "./TitleScreen.css";
 
-function TitleScreen({ onSelectDifficulty }) {
+function TitleScreen({ onSelectDifficulty, language }) {
   return (
     <div className="title-screen">
-      <h1>Hangman Game</h1>
+      <h1>{language === "EN" ? "Hangman Game" : "Gra Wisielec"}</h1>
       <div className="difficulty-buttons">
-        <button onClick={() => onSelectDifficulty("easy")}>Łatwy</button>
-        <button onClick={() => onSelectDifficulty("medium")}>Średni</button>
-        <button onClick={() => onSelectDifficulty("hard")}>Trudny</button>
+        <button onClick={() => onSelectDifficulty("easy")}>
+          {language === "EN" ? "Easy" : "Łatwy"}
+        </button>
+        <button onClick={() => onSelectDifficulty("medium")}>
+          {language === "EN" ? "Medium" : "Średni"}
+        </button>
+        <button onClick={() => onSelectDifficulty("hard")}>
+          {language === "EN" ? "Hard" : "Trudny"}
+        </button>
       </div>
     </div>
   );

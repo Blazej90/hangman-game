@@ -1,0 +1,12 @@
+.language-switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.flag {
+  width: 32px;
+  height: 20px;
+  object-fit: cover;
+}

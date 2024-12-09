@@ -1,10 +1,10 @@
 import React from "react";
 import "./BackToMenuButton.css";
 
-function BackToMenuButton({ onBackToMenu }) {
+function BackToMenuButton({ onBackToMenu, language }) {
   return (
     <button className="back-to-menu-button" onClick={onBackToMenu}>
-      Strona główna
+      {language === "EN" ? "Home" : "Strona główna"}
     </button>
   );
 }

@@ -1,10 +1,10 @@
 import React from "react";
 import "./ResetButton.css";
 
-function ResetButton({ onReset }) {
+function ResetButton({ onReset, language }) {
   return (
     <button onClick={onReset} className="reset-button">
-      Restart
+      {language === "EN" ? "Restart" : "Uruchom ponownie"}
     </button>
   );
 }
