@@ -1,14 +1,19 @@
 import React from "react";
 import "./Hangman.css";
 
-function Hangman({ mistakes, category }) {
-  const imagePath = `/images/hangman/hangman${Math.min(mistakes, 10)}.jpg`;
-
+function Hangman({ mistakes, category, language }) {
   return (
     <div className="hangman">
-      <img src={imagePath} alt={`Hangman stage ${mistakes}`} />
-      <p className="trials">Błędne próby: {mistakes}/10</p>
-      {category && <p className="category">Kategoria: {category}</p>}{" "}
+      <img
+        src={`/images/hangman/hangman${Math.min(mistakes, 10)}.jpg`}
+        alt={`Hangman stage ${mistakes}`}
+      />
+      <p className="trials">
+        {language === "EN"
+          ? `Incorrect tries: ${mistakes}/10`
+          : `Błędne próby: ${mistakes}/10`}
+      </p>
+      {category && <p className="category">{category}</p>}
     </div>
   );
 }

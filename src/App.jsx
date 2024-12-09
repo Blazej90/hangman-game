@@ -98,7 +98,11 @@ function App() {
       {gameStarted ? (
         <>
           <h1>{language === "EN" ? "Hangman" : "Wisielec"}</h1>
-          <Hangman mistakes={mistakes} category={category} />
+          <Hangman
+            mistakes={mistakes}
+            category={category}
+            language={language}
+          />
           <Word word={word} guessedLetters={guessedLetters} />
           {gameStatus === "win" && (
             <p className="win">
@@ -110,8 +114,8 @@ function App() {
           {gameStatus === "lose" && (
             <p className="lose">
               {language === "EN"
-                ? `Sorry, you lost... The correct word was: ${word}`
-                : `Niestety przegrywasz... Prawidłowe hasło to: ${word}`}
+                ? `Sorry, you lost... The correct word: ${word}`
+                : `Niestety przegrywasz... Prawidłowe hasło: ${word}`}
             </p>
           )}
           <Keyboard
