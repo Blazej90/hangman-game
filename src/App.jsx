@@ -32,7 +32,7 @@ function App() {
       console.error("Nie udało się znaleźć słowa. Sprawdź dane JSON.");
       return;
     }
-    setWord(word.toUpperCase()); // Konwertowanie słowa na wielkie litery
+    setWord(word.toUpperCase());
     setCategory(category);
     setGuessedLetters([]);
     setMistakes(0);
@@ -46,7 +46,7 @@ function App() {
       console.error("Nie udało się znaleźć słowa. Sprawdź dane JSON.");
       return;
     }
-    setWord(word.toUpperCase()); // Konwertowanie słowa na wielkie litery
+    setWord(word.toUpperCase());
     setCategory(category);
     setGuessedLetters([]);
     setMistakes(0);
@@ -105,7 +105,6 @@ function App() {
 
       {gameStarted ? (
         <>
-          <h1>{language === "EN" ? "Hangman" : "Wisielec"}</h1>
           <Hangman
             mistakes={mistakes}
             category={category}
