@@ -1,0 +1,14 @@
+{
+  "easy": {
+    "animals": ["cat", "dog", "fish"],
+    "fruits": ["apple", "banana", "pear"]
+  },
+  "medium": {
+    "animals": ["elephant", "giraffe", "hippopotamus"],
+    "fruits": ["pineapple", "watermelon", "strawberry"]
+  },
+  "hard": {
+    "animals": ["hippopotamus", "platypus", "quokka"],
+    "fruits": ["blueberry", "blackberry", "cranberry"]
+  }
+}

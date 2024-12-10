@@ -1,23 +1,37 @@
-import wordData from "../data/words.json";
+import wordsPL from "../data/words_PL.json";
+import wordsEN from "../data/words_EN.json";
 
-export function getRandomWord(level) {
-  let wordList;
+export function getRandomWord(difficulty, language) {
+  const words = language === "PL" ? wordsPL : wordsEN;
 
-  if (level === "easy") {
-    wordList = wordData.easyWords;
-  } else if (level === "medium") {
-    wordList = wordData.mediumWords;
-  } else {
-    wordList = wordData.hardWords;
+  if (!words || !words[difficulty]) {
+    console.error(
+      `Brak danych dla trudności: ${difficulty} w języku: ${language}`
+    );
+    return { word: "", category: "" };
   }
 
-  const categories = Object.keys(wordList);
+  const categories = Object.keys(words[difficulty]);
+  if (categories.length === 0) {
+    console.error(
+      `Brak kategorii dla trudności: ${difficulty} w języku: ${language}`
+    );
+    return { word: "", category: "" };
+  }
+
   const randomCategory =
     categories[Math.floor(Math.random() * categories.length)];
+  const randomWords = words[difficulty][randomCategory];
 
-  const wordsInCategory = wordList[randomCategory];
+  if (!randomWords || randomWords.length === 0) {
+    console.error(
+      `Brak słów w kategorii: ${randomCategory} dla trudności: ${difficulty} w języku: ${language}`
+    );
+    return { word: "", category: "" };
+  }
+
   const randomWord =
-    wordsInCategory[Math.floor(Math.random() * wordsInCategory.length)];
+    randomWords[Math.floor(Math.random() * randomWords.length)];
 
-  return { word: randomWord.toUpperCase(), category: randomCategory };
+  return { word: randomWord, category: randomCategory };
 }

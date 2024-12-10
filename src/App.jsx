@@ -27,8 +27,12 @@ function App() {
 
   function startGame(selectedDifficulty) {
     setDifficulty(selectedDifficulty);
-    const { word, category } = getRandomWord(selectedDifficulty);
-    setWord(word);
+    const { word, category } = getRandomWord(selectedDifficulty, language);
+    if (!word) {
+      console.error("Nie udało się znaleźć słowa. Sprawdź dane JSON.");
+      return;
+    }
+    setWord(word.toUpperCase()); // Konwertowanie słowa na wielkie litery
     setCategory(category);
     setGuessedLetters([]);
     setMistakes(0);
@@ -37,8 +41,12 @@ function App() {
   }
 
   function resetGame() {
-    const { word, category } = getRandomWord(difficulty);
-    setWord(word);
+    const { word, category } = getRandomWord(difficulty, language);
+    if (!word) {
+      console.error("Nie udało się znaleźć słowa. Sprawdź dane JSON.");
+      return;
+    }
+    setWord(word.toUpperCase()); // Konwertowanie słowa na wielkie litery
     setCategory(category);
     setGuessedLetters([]);
     setMistakes(0);
@@ -76,7 +84,7 @@ function App() {
 
     if (gameStatus) return;
 
-    if (word.toUpperCase().includes(upperCaseLetter)) {
+    if (word.includes(upperCaseLetter)) {
       if (!guessedLetters.includes(upperCaseLetter)) {
         setGuessedLetters((prev) => [...prev, upperCaseLetter]);
       }

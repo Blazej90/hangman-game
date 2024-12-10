@@ -1,0 +1,14 @@
+{
+  "easy": {
+    "zwierzęta": ["kot", "pies", "ryba"],
+    "owoce": ["jabłko", "banan", "gruszka"]
+  },
+  "medium": {
+    "zwierzęta": ["słoń", "żyrafa", "hipopotam"],
+    "owoce": ["ananas", "arbuz", "truskawka"]
+  },
+  "hard": {
+    "zwierzęta": ["hipopotam", "dziobak", "głuszec"],
+    "owoce": ["jagoda", "czarna porzeczka", "żurawina"]
+  }
+}

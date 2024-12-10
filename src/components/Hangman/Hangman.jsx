@@ -13,7 +13,12 @@ function Hangman({ mistakes, category, language }) {
           ? `Incorrect tries: ${mistakes}/10`
           : `Błędne próby: ${mistakes}/10`}
       </p>
-      {category && <p className="category">{category}</p>}
+      {category && (
+        <p className="category">
+          {language === "EN" ? "Category: " : "Kategoria: "}
+          {category}
+        </p>
+      )}
     </div>
   );
 }
