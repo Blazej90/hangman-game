@@ -16,25 +16,46 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+.difficulty-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
 .difficulty-buttons button {
   margin: 10px;
   padding: 15px 25px;
   font-size: 1.2rem;
+  font-weight: bold;
   color: #fff;
-  background-color: #333;
-  border: none;
-  border-radius: 8px;
+  background: linear-gradient(145deg, #3b3b3b, #1f1f1f);
+  border: 2px solid #4caf50;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5),
+    inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
 }
 
 .difficulty-buttons button:hover {
-  background-color: #555;
-  transform: scale(1.05);
+  background: linear-gradient(145deg, #4caf50, #2d6e3f);
+  border-color: #3f9f3f;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.7),
+    inset 0 3px 6px rgba(255, 255, 255, 0.15);
+}
+
+.difficulty-buttons button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+  background: linear-gradient(145deg, #2d6e3f, #1c4d2e);
 }
 
 @media (max-width: 600px) {
-  .title {
+  .title-screen h1 {
     font-size: 2rem;
   }
 
